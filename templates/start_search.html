@@ -1,0 +1,42 @@
+<!doctype html>
+<head>
+	<title>Ortholog Finder</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	
+</head>
+
+<body>
+	<div>
+  		<h1>Ortholog Finder</h1>
+  		<a href="{{ url_for('random_data') }}">Random Data Generator</a>
+  		<br />
+  		<br />
+  		
+  		<form id="form" method="post" action="{{ url_for('search') }}">
+  			Organism 1:
+			<select name="organism1">
+				{% for i in speciesList %}
+					<option value="{{ i }}">{{ i }}</option>
+				{% endfor %}
+			</select> <br/><br/>
+			Organism 2:
+			<select name="organism2">
+				{% for i in speciesList %}
+					<option value="{{ i }}">{{ i }}</option>
+				{% endfor %}
+			</select> <br/><br/>
+		
+			
+		
+			<input type="submit" value="Next" /> <br/>
+    	</form>
+	</div>
+</body>

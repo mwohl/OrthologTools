@@ -1,0 +1,70 @@
+<!doctype html>
+<head>
+	<title>Ortholog Finder</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	
+	<script>
+		function displayRangeBox(){
+			document.getElementById("rangeSpan").style.display = "";
+		}
+	
+		function hideRangeBox(){
+			document.getElementById("rangeSpan").style.display = "none";
+		}
+	</script>
+	
+</head>
+
+<body>
+	<div>
+  		<a href="{{ url_for('index') }}"><h1>Ortholog Finder</h1></a>
+  		<a href="{{ url_for('random_data') }}">Random Data Generator</a>
+  		<br />
+  		<br />
+  		
+  		<form id="form" method="post" action="{{ url_for('shows') }}">
+  			Organism 1:
+			<select name="organism1">
+				{% for i in speciesList1 %}
+					<option value="{{ i }}">{{ i }}</option>
+				{% endfor %}
+			</select> <br/><br/>
+			Organism 2:
+			<select name="organism2">
+				{% for i in speciesList2 %}
+					<option value="{{ i }}">{{ i }}</option>
+				{% endfor %}
+			</select> <br/><br/>
+		
+			<h4>Format</h4>
+			<input type="radio" id="format" name="format" value="csv" onclick="hideRangeBox()">  CSV [ chr,start, end ] <br>
+			<input type="radio" id="format" name="format" value="dots" onclick="hideRangeBox()">  .. [ chr:start..end ] <br>
+			<input type="radio" id="format" name="format" value="dash" onclick="hideRangeBox()">  - [ chr:start-end ]   <br>
+			<input type="radio" id="format" name="format" value="snp" onclick="displayRangeBox()">  [ SNP ]             <br>
+			<span id="rangeSpan" style="display:none">
+				<input type="text" name="range1" id="range1" value="0"> Organism 1 Range
+				<input type="text" name="range2" id="range2" value="0"> Organism 2 Range
+			</span> <br/><br/>
+		
+			<label for="org_1_ranges">Please enter First Organism Ranges:</label>     <br/>
+			<textarea rows="100" cols="40" name="org_1_ranges" form="form"></textarea> <br/>
+	
+			<label for="org_2_ranges">Please enter Second Organism Ranges:</label>    <br/>
+			<textarea rows="100" cols="40" name="org_2_ranges" form="form"></textarea> <br/><br/>
+			
+			Run Random Analysis? <br/>
+			<input type="radio" id="random" name="random" value="y"> Yes <br/>
+			<input type="radio" id="random" name="random" value="n"> No <br/> <br/>
+			
+			<input type="submit" /> <br/>
+    	</form>
+	</div>
+</body>

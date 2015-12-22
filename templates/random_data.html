@@ -1,0 +1,37 @@
+<!doctype html>
+<head>
+	<title>Ortholog Finder -- Random Data Generator</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	
+</head>
+
+<body>
+	<div>
+  		<h1>Ortholog Finder -- Random Data Generator</h1><br />
+  		<form id="form" method="post" action="{{ url_for('return_random') }}">
+  		
+  			<label for="organism">Select an organism:</label> <br />
+  			<select name="organism">
+				{% for i in speciesList %}
+					<option value="{{ i }}">{{ i }}</option>
+				{% endfor %}
+			</select> <br/><br/>
+		
+			<label for="org_1_ranges">Please enter Organism Ranges (chr,start,stop):</label>     <br/>
+			<textarea rows="10" cols="40" name="org_1_ranges" form="form"></textarea> <br/> <br/>
+	
+			<!--<label for="org_2_ranges">Please enter Second Organism Ranges:</label>    <br/>
+			<textarea rows="10" cols="40" name="org_2_ranges" form="form"></textarea> <br/><br/>-->
+		
+			<input type="submit" /> <br/>
+    	</form>
+	</div>
+</body>
