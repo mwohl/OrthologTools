@@ -163,8 +163,86 @@ def shows():
 	if format == "done":
 		org_1_ranges = org_1_ranges_input
 		org_2_ranges = org_2_ranges_input
+		
+	#Convert the range searches into searchable objects
+	search1 = pandas.read_csv(StringIO(org_1_ranges))
+	search2 = pandas.read_csv(StringIO(org_2_ranges))
 	
-	result = do_search(org_1, org_2, format, org_1_ranges, org_2_ranges, snpRange1, snpRange2)
+
+	print "Search, not random"
+	for index, row in search1.iterrows():
+		for index2, row2 in search1.iterrows():
+			if str(row) == str(row2):
+				a = 1
+			else:
+				if (str(row["chr"]) == str(row2["chr"])):
+					if ((row["start"] >= row2["start"]) & (row["start"] <= row2["end"])) | ((row["end"] >= row2["start"]) & (row["end"] <= row2["end"])):
+						if row["start"] <= row2["start"]:
+							a = 1
+						else:
+							row["start"] = row2["start"]
+						if row["end"] >= row2["end"]:
+							a = 1
+						else:
+							row["end"] = row2["end"]
+						search1.drop([index2])
+					else:
+						a = 1
+				else:
+					a=1
+	search1.drop_duplicates(inplace=True)
+		
+		
+		
+	testtest_1 = '"chr","start","end"' + "\n"
+	
+	for index, row in search1.iterrows():
+		tmp = ""
+		chr = int(row['chr'])
+		start = int(row['start'])
+		end = int(row['end'])
+	
+		tmp = str(chr) + "," + str(start) + "," + str(end) + "\n"
+		testtest_1 = testtest_1 + tmp
+		
+		
+				
+	for index, row in search2.iterrows():
+		for index2, row2 in search2.iterrows():
+			if str(row) == str(row2):
+				a = 1
+			else:
+				if (str(row["chr"]) == str(row2["chr"])):
+					if ((row["start"] >= row2["start"]) & (row["start"] <= row2["end"])) | ((row["end"] >= row2["start"]) & (row["end"] <= row2["end"])):
+						if row["start"] <= row2["start"]:
+							a = 1
+						else:
+							row["start"] = row2["start"]
+						if row["end"] >= row2["end"]:
+							a = 1
+						else:
+							row["end"] = row2["end"]
+						search2.drop([index2])
+					else:
+						a = 1
+				else:
+					a=1
+	search2.drop_duplicates(inplace=True)
+		
+	testtest_2 = '"chr","start","end"' + "\n"
+	
+	for index, row in search2.iterrows():
+		tmp = ""
+		chr = int(row['chr'])
+		start = int(row['start'])
+		end = int(row['end'])
+
+		tmp = str(chr) + "," + str(start) + "," + str(end) + "\n"
+		testtest_2 = testtest_2 + tmp
+	
+	
+	type = 's'
+	result = do_search(org_1, org_2, search1, search2, type)
 	
 	print "Search"
   	print result.apply(pandas.Series.nunique)
@@ -174,6 +252,15 @@ def shows():
 	os.mkdir( pathName, 0755 );
 	fileName = 'static/' + str(randonFileName) + '/' + 'result.csv'
 	result.to_csv(fileName)
+	
+	range_fileName = 'static/' + str(randonFileName) + '/range_' + 'query' + '.txt'
+	f = open(range_fileName,'w')
+	print>>f, "1:"
+  	print>>f, testtest_1
+  	print>>f, "\n"
+  	print>>f, "2:"
+  	print>>f, testtest_2
+  	f.close()
 	
 	summary_fileName = 'static/' + str(randonFileName) + '/summary' + '.txt'
 	
@@ -186,8 +273,8 @@ def shows():
 	
 		meta_file_name = 'static/' + str(randonFileName) + '/random_' + 'meta' + '.csv'
 		
-		print "ORG1:" + str(org_1_ranges) + "\n"
-		print "ORG2:" + str(org_2_ranges)
+		#print "ORG1:" + str(org_1_ranges) + "\n"
+		#print "ORG2:" + str(org_2_ranges)
 	
 		maize = [10,301476924,237917468,232245527,242062272,217959525,169407836,176826311,175377492,157038028,149632204];
 		arabidopsis = [5,30427671,19698289,23459830,18585056,26975502];
@@ -234,10 +321,17 @@ def shows():
 		print str(randonFileName) + "\n"
 		format = 'done'
 		while i <= n:
-			org_1_range = generate_one_range(org_1_ranges, arr1)
-			org_2_range = generate_one_range(org_2_ranges, arr2)
+			org_1_range = generate_one_range(testtest_1, arr1)
+			org_2_range = generate_one_range(testtest_2, arr2)
+			type = 'r'
 			
-			result = do_search(org_1, org_2, format, org_1_range, org_2_range, snpRange1, snpRange2)
+			#Convert the range searches into searchable objects
+			search1 = pandas.read_csv(StringIO(org_1_range))
+			search2 = pandas.read_csv(StringIO(org_2_range))
+			result = do_search(org_1, org_2, search1, search2, type)
+			
+			print "Search"
+  			print result.apply(pandas.Series.nunique)
 			print str(i) + "\n"
 			range_fileName = 'static/' + str(randonFileName) + '/range_' + str(i) + '.txt'
 			f = open(range_fileName,'w')
