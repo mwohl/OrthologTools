@@ -1,5 +1,4 @@
-import flask
-from flask import render_template, request, url_for, make_response
+from flask import Flask, render_template, request, url_for, make_response
 import pandas
 from StringIO import StringIO
 from format_conversion_functions import CSVFormatConversion, dotFormatConversion, dashFormatConversion, snpFormatConversion
@@ -11,7 +10,7 @@ import os, sys
 import shutil
 from search_functions import do_search
 
-app = flask.Flask(__name__)
+app = Flask(__name__)
 
 @app.route('/')
 def index():
@@ -249,11 +248,14 @@ def shows():
 	
 	randonFileName = int(random.random()*1000)
 	pathName = 'static/' + str(randonFileName) + '/'
+        #pathName = '../../resultFiles/' + str(randonFileName) + '/'
 	os.mkdir( pathName, 0755 );
 	fileName = 'static/' + str(randonFileName) + '/' + 'result.csv'
+        #fileName = '../../resultFiles/' + str(randonFileName) + '/' + 'result.csv'
 	result.to_csv(fileName)
 	
 	range_fileName = 'static/' + str(randonFileName) + '/range_' + 'query' + '.txt'
+        #range_fileName = '../../resultFiles/' + str(randonFileName) + '/range_'+'query'+ '.txt'
 	f = open(range_fileName,'w')
 	print>>f, "1:"
   	print>>f, testtest_1
@@ -263,6 +265,7 @@ def shows():
   	f.close()
 	
 	summary_fileName = 'static/' + str(randonFileName) + '/summary' + '.txt'
+        #summary_fileName = '../../resultFiles/' + str(randonFileName) + '/summary' + '.txt'
 	
 	f = open(summary_fileName,'a')
   	print>>f, "Search"
@@ -272,6 +275,7 @@ def shows():
 	if random_analysis_check == 'y':
 	
 		meta_file_name = 'static/' + str(randonFileName) + '/random_' + 'meta' + '.csv'
+                #meta_file_name = '../../resultFiles/' + str(randonFileName) + '/random_' + 'meta' + '.csv'
 		
 		#print "ORG1:" + str(org_1_ranges) + "\n"
 		#print "ORG2:" + str(org_2_ranges)
@@ -334,6 +338,7 @@ def shows():
   			print result.apply(pandas.Series.nunique)
 			print str(i) + "\n"
 			range_fileName = 'static/' + str(randonFileName) + '/range_' + str(i) + '.txt'
+                        #range_fileName = '../../resultFiles/' + str(randonFileName) + '/range_' + str(i) + '.txt'
 			f = open(range_fileName,'w')
 			print>>f, "1:"
   			print>>f, org_1_range
@@ -348,6 +353,7 @@ def shows():
   			f.close()
   			
 			fileName = 'static/' + str(randonFileName) + '/random_' + str(i) + '.csv'
+                        #fileName = '../../resultFiles/' + str(randonFileName) + '/random_' + str(i) + '.csv'
 			result.to_csv(fileName)
 			
 			i = i + 1

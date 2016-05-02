@@ -30,6 +30,7 @@ def generateRandom(range, arr):
 	n = 100
 	randomFileName = int(random.random()*1000)
 	pathName = 'static/random/' + str(randomFileName) + '/'
+        
 	os.mkdir( pathName, 0755 );
 	
 	while i < n:
@@ -54,6 +55,7 @@ def generateRandom(range, arr):
 			
 		
 		fileName = 'static/random/' + str(randomFileName) + '/' + str(i) + '.csv'
+                
 		f = open(fileName,'w')
 		for item in random_range:
   			print>>f, item

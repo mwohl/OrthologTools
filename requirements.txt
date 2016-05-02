@@ -1,0 +1,14 @@
+Flask==0.10.1
+itsdangerous==0.24
+Jinja2==2.8
+MarkupSafe==0.23
+methylpy==0.1.1
+numpy==1.11.0
+pandas==0.18.0
+pymeanshift==0.2.1
+python-dateutil==2.5.2
+pytz==2016.3
+PyYAML==3.11
+RNA==2.1.9
+six==1.10.0
+Werkzeug==0.11.8
