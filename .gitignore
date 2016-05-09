@@ -43,3 +43,4 @@ Thumbs.db
 static/*
 !static/data/
 venv/*
+OrthologTools/static/*

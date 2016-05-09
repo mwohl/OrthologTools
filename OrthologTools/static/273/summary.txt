@@ -1,0 +1,16 @@
+Search
+Homolog > Gene 1 . Primary Identifier             1
+Homolog > Gene 1 > Organism Name                  1
+Homolog > Gene 2 . Primary Identifier             1
+Homolog > Gene 2 > Organism Name                  1
+Homolog > Relationship                            1
+Homolog > Gene 2 > Chromosome Location . End      1
+Homolog > Gene 2 > Chromosome Location . Start    1
+Homolog > Gene 1 > Chromosome Location . End      1
+Homolog > Gene 1 > Chromosome Location . Start    1
+Homolog > Gene 1 > Chromosome > Name              1
+Homolog > Gene 2 > Chromosome > Name              1
+Homolog > Gene 1 > Defline                        0
+Homolog > Gene 2 > Defline                        1
+Unnamed: 13                                       0
+dtype: int64
