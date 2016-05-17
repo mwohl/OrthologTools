@@ -40,7 +40,11 @@ Thumbs.db
 ######################
 *.pyc
 
+config.py
 static/*
 !static/data/
 venv/*
 OrthologTools/static/*
+OrthologTools/static/data/*
+OrthologTools/results/*
+OrthologTools/tmp/*

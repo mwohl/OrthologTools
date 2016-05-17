@@ -1,3 +1,4 @@
+from OrthologTools import app
 import re
 import os.path
 import os, sys
@@ -15,7 +16,8 @@ def do_search(org_1, org_2, search1, search2, type):
 	
 	selected_species_list = [org_1, org_2]
 	
-	species_data_file = "static/data/" + selected_species_list[0] + "_" + selected_species_list[1] + ".csv"
+	#species_data_file = "OrthologTools/static/data/" + selected_species_list[0] + "_" + selected_species_list[1] + ".csv"
+	species_data_file = app.config['DATA_DIR'] + selected_species_list[0] + "_" + selected_species_list[1] + ".csv"
         	
 	if os.path.isfile(species_data_file):
 		df = pandas.read_csv(species_data_file)
