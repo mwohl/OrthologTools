@@ -1,3 +1,5 @@
+from OrthologTools import app
+
 import random
 import os, sys
 import shutil
@@ -29,7 +31,8 @@ def generateRandom(range, arr):
 	i = 0
 	n = 100
 	randomFileName = int(random.random()*1000)
-	pathName = 'static/random/' + str(randomFileName) + '/'
+	#pathName = 'static/random/' + str(randomFileName) + '/'
+	pathName = app.config['RANDOM_RESULTS_DIR'] + str(randomFileName) + "/"
         
 	os.mkdir( pathName, 0755 );
 	
@@ -54,7 +57,7 @@ def generateRandom(range, arr):
 			random_range.append(tmp)
 			
 		
-		fileName = 'static/random/' + str(randomFileName) + '/' + str(i) + '.csv'
+		fileName = app.config['RANDOM_RESULTS_DIR'] + str(randomFileName) + '/' + str(i) + '.csv'
                 
 		f = open(fileName,'w')
 		for item in random_range:
